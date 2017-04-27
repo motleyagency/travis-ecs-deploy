@@ -27,7 +27,7 @@ if [ $? = 0 ]; then
   AWSBIN=$(which aws)
   AWSPATH=$(dirname $AWSBIN)
   export PATH=$PATH:$AWSPATH
-  export SCRIPTDIR=$(dirname "$0")
+  export SCRIPTDIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
   ${SCRIPTDIR}/docker_push.sh &&
   ${SCRIPTDIR}/ecs_deploy.sh
