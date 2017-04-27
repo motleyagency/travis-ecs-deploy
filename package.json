@@ -1,5 +1,5 @@
 {
-  "name": "ecs-deploy",
+  "name": "travis-ecs-deploy",
   "version": "1.0.0",
   "description": "Scripts for use in Travic CI for building and pushing docker images to AWS and deploying them in ECS",
   "author": "Fredrik Boström <fredrik.bostrom@motleyagency.com>",
