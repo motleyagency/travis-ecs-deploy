@@ -101,8 +101,20 @@ In addition, a set of the following environment variables must be defined for ea
 
 Name | Description
 -----|------------
-** ECS_CLUSTER_*BRANCH_NAME* ** | The name of the ECS Cluster for the *BRANCH_NAME*, e.g. ECS_CLUSTER_MASTER
-** ECS_SERVICE_*BRANCH_NAME* ** | The name of the ECS Service for the *BRANCH_NAME*, e.g. ECS_SERVICE_MASTER
+__ECS_CLUSTER_*BRANCH_NAME*__ | The name of the ECS Cluster for the *BRANCH_NAME*, e.g. ECS_CLUSTER_MASTER
+__ECS_SERVICE_*BRANCH_NAME*__ | The name of the ECS Service for the *BRANCH_NAME*, e.g. ECS_SERVICE_MASTER
+
+### package.json
+
+Add the following npm/yarn script to your `package.json`
+
+```json
+{
+    "scripts": {
+        "ecs-deploy": "ecs-deploy"
+    }
+}
+```
 
 ### .travis.yml
 
@@ -111,6 +123,7 @@ The environment variables are typically defined in the `.travis.yml` file which 
 ```yaml
 env:
   global:
+    - IMAGE_NAME=simple-todo
     - DEPLOY_BRANCHES=master
     - AWS_REGION=eu-central-1
     # AWS_ACCESS_KEY_ID=83460cadb90f034be815
@@ -123,10 +136,12 @@ env:
     - ECS_SERVICE_MASTER=simple-todo
 
 deploy:
-- provider: script
-  script: node_modules/aws-provisioning/bin/run.sh
+  skip_cleanup: true
+  provider: script
+  script:
+    - yarn run ecs-deploy   # or "npm run ecs-deploy"
   on:
-    branch: master
+    all_branches: true
 ```
 
 
