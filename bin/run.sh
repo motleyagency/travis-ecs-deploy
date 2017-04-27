@@ -28,8 +28,6 @@ if [ $? = 0 ]; then
   AWSPATH=$(dirname $AWSBIN)
   export PATH=$PATH:$AWSPATH
   export SCRIPTDIR=$(dirname "$0")
-  echo "SCRIPTDIR:"
-  echo $SCRIPTDIR
 
   ${SCRIPTDIR}/docker_push.sh &&
   ${SCRIPTDIR}/ecs_deploy.sh
