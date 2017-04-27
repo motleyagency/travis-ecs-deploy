@@ -101,8 +101,8 @@ In addition, a set of the following environment variables must be defined for ea
 
 Name | Description
 -----|------------
-__ECS_CLUSTER_*BRANCH_NAME*__ | The name of the ECS Cluster for the *BRANCH_NAME*, e.g. ECS_CLUSTER_MASTER
-__ECS_SERVICE_*BRANCH_NAME*__ | The name of the ECS Service for the *BRANCH_NAME*, e.g. ECS_SERVICE_MASTER
+**ECS_CLUSTER_BRANCH_NAME** | The name of the ECS Cluster for the *BRANCH_NAME*, e.g. ECS_CLUSTER_MASTER
+**ECS_SERVICE_BRANCH_NAME** | The name of the ECS Service for the *BRANCH_NAME*, e.g. ECS_SERVICE_MASTER
 
 ### package.json
 
