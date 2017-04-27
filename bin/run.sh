@@ -21,8 +21,18 @@ if [[ ! " ${BRANCHES_TO_DEPLOY[@]} " =~ " ${TRAVIS_BRANCH} " ]]; then
   exit 0
 fi
 
-pip install awscli -q &&
-./docker_push.sh &&
-./ecs_deploy.sh
+pip install awscli -q
 
+if [ $? = 0 ]; then
+  AWSBIN=$(which aws)
+  AWSPATH=$(dirname $AWSBIN)
+  export PATH=$PATH:$AWSPATH
+  export SCRIPTDIR=$(dirname "$0")
 
+  $SCRIPTDIR/docker_push.sh &&
+  $SCRIPTDIR/ecs_deploy.sh
+
+else
+  echo "Failed to install AWS CLI"
+  exit 1
+fi

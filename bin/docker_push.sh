@@ -1,15 +1,20 @@
 #! /bin/bash
 
 # import util functions
-source "../lib/util.sh"
+source "${SCRIPTDIR}/../lib/util.sh"
 
-export PATH=$PATH:$HOME/.local/bin
+echo "Logging into ECR..."
+AWS_LOGIN=$(runCommand "aws ecr get-login --region $AWS_REGION")
 
-echo "Logging into ECR..." &&
-runCommand "eval $("aws ecr get-login --region $AWS_REGION")" &&
-echo "Building Docker image..."
-runCommand "docker build -t $IMAGE_NAME ." &&
-echo "Pushing image $IMAGE_NAME:$TRAVIS_BRANCH" &&
-runCommand "docker tag $IMAGE_NAME:latest $REMOTE_IMAGE_URL:$TRAVIS_BRANCH" &&
-runCommand "docker push $REMOTE_IMAGE_URL:$TRAVIS_BRANCH" &&
-echo "Successfully built and pushed $REMOTE_IMAGE_URL:$TRAVIS_BRANCH"
+if [ "$?" = "0" ]; then
+  eval $($AWS_LOGIN) || exit $?
+  echo "Building Docker image..."
+  runCommand "docker build -t $IMAGE_NAME ." || exit $?
+  echo "Pushing image $IMAGE_NAME:$TRAVIS_BRANCH"
+  runCommand "docker tag $IMAGE_NAME:latest $REMOTE_IMAGE_URL:$TRAVIS_BRANCH" || exit $?
+  runCommand "docker push $REMOTE_IMAGE_URL:$TRAVIS_BRANCH" || exit $?
+  echo "Successfully built and pushed $REMOTE_IMAGE_URL:$TRAVIS_BRANCH"
+else
+  echo "Failed to log in to AWS, exiting"
+  exit 1
+fi

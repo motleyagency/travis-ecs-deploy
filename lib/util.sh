@@ -13,5 +13,6 @@ function runCommand {
     echo $1;
   else
     eval $1
+    return $?
   fi
 }
