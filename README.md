@@ -111,7 +111,7 @@ Add the following npm/yarn script to your `package.json`
 ```json
 {
     "scripts": {
-        "ecs-deploy": "ecs-deploy"
+        "travis-ecs-deploy": "travis-ecs-deploy"
     }
 }
 ```
@@ -139,7 +139,7 @@ deploy:
   skip_cleanup: true
   provider: script
   script:
-    - yarn run ecs-deploy   # or "npm run ecs-deploy"
+    - yarn run travis-ecs-deploy   # or "npm run travis-ecs-deploy"
   on:
     all_branches: true
 ```
