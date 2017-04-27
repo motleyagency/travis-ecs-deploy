@@ -7,7 +7,7 @@ echo "Logging into ECR..."
 AWS_LOGIN=$(runCommand "aws ecr get-login --region $AWS_REGION")
 
 if [ "$?" = "0" ]; then
-  eval $($AWS_LOGIN) || exit $?
+  eval $AWS_LOGIN || exit $?
   echo "Building Docker image..."
   runCommand "docker build -t $IMAGE_NAME ." || exit $?
   echo "Pushing image $IMAGE_NAME:$TRAVIS_BRANCH"
