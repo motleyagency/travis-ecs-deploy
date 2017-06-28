@@ -16,7 +16,7 @@ Create an **ECS Repository** for storing the project's Docker image. Take note o
 
 Create one **ECS Task Definition** for each of the environments. The Task Definition should use the image from the created ECS Repository tagged with the branch/environment name.
 
-Create one **ECS Cluster** per environment you want to deploy. The cluster can be shared among several projects, for example if the project consists of a separate frontend and backed. Both projects can use the same clusters, but different services in the clusters. The cluster names are configurable with environment variables (see below).
+Create one **ECS Cluster** per environment you want to deploy. The cluster can be shared among several projects, for example if the project consists of a separate frontend and backend. Both projects can use the same clusters, but different services in the clusters. The cluster names are configurable with environment variables (see below).
 
 Create an **ECS Service** in the Cluster for keeping the Task running.
 
