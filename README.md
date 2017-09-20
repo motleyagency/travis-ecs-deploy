@@ -188,3 +188,7 @@ An IAM User `simple-todo-travis` is created with the above policy and an Access 
 * Access key ID: `83460cadb90f034be815`
 * Secret access key: `73ebce91f95d4939805b-3d1ba967c59d9ba9a7b7701a436ca04d-a0aa972e6642`
 
+### Acknowledgements
+
+- [ecs-deploy](https://github.com/silinternational/ecs-deploy) - shell script for initiating blue-green deployments on AWS ECS
+
