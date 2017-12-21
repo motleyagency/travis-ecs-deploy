@@ -4,7 +4,7 @@
 source "${SCRIPTDIR}/../lib/util.sh"
 
 echo "Logging into ECR..."
-AWS_LOGIN=$(runCommand "aws ecr get-login --region $AWS_REGION")
+AWS_LOGIN=$(runCommand "aws ecr get-login --region $AWS_REGION --no-include-email")
 
 if [ "$?" = "0" ]; then
   eval $AWS_LOGIN || exit $?
